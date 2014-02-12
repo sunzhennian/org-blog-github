@@ -1,0 +1,15 @@
+#+TITLE: Home
+#+BEGIN_HTML 
+ <div class="span6"><ul>
+ <li> 
+            <span style="float:right">2013-10-29</span><a href=post/emacs/2013-10-29-byte-compile-of-el.html style="float:left">Emacs如何字节编译.el文件</a>
+          </li>
+<li> 
+            <span style="float:right">2013-10-26</span><a href=post/tools/2013-10-26-git-user-manual.html style="float:left">使用git管理代码</a>
+          </li>
+<li> 
+            <span style="float:right">2013-10-25</span><a href=post/emacs/2013-10-25-using-ibus.html style="float:left">在emacs中使用ibus输入法</a>
+          </li>
+</ul>
+</div>
+ #+END_HTML
