@@ -146,7 +146,7 @@
     (insert "#+Title: temp\n")
     (insert "#+DATE: " (format-time-string "%Y-%m-%d"))
     (insert "\n")
-    (insert "#+OPTIONS: toc:nil section-numbers:nil\n")
+    (insert "#+OPTIONS: toc:nil num:nil\n")
     (insert "#+CATEGORY: \n")
     (insert "#+TAGS: \n")
     (save-buffer)
