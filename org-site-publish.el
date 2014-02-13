@@ -85,7 +85,6 @@
                    (expand-file-name site-sub-dir base-dir)))
          (sub-index (expand-file-name "index.org" sub-dir))
          (absolute-org-files (org-site-publish-get-base-files sub-dir)))
-    (message "------------------------>%s" absolute-org-files)
     (setq path-title-mtime-org-files
           (mapcar (lambda (filename)
                     (list (concat site-sub-dir
@@ -127,7 +126,8 @@
                 (ht-tag (ht-get tags tag)))
             (ht-set tags tag (cons path-title-pair ht-tag)))))
      (setq tag-keys-origin (ht-keys tags))
-     (setq tag-keys (sort tag-keys-origin (lambda (a b) (string< (downcase a) (downcase b)))))
+     (setq tag-keys-origin (sort tag-keys-origin (lambda (a b) (string< (downcase a) (downcase b)))))
+     (setq tag-keys tag-keys-origin)
     (setq tags-file (expand-file-name "tags.org" base-dir))
     (with-temp-buffer
          (insert "#+OPTIONS: num:nil toc:nil\n")

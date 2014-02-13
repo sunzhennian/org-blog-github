@@ -21,13 +21,12 @@
 (defun org-org-get-file-title (org-file)
      (with-temp-buffer
       (insert-file-contents org-file)
-      (setq opt-list (org-export--get-inbuffer-options))
-      (message "--- TTT is %s"  opt-list))
+      (setq opt-list (org-export--get-inbuffer-options)))
       (car(plist-get opt-list :title)))
      ; (setq opt-plist (org-infile-export-plist))
       ;(or (plist-get opt-plist :title)
-       ;   (file-name-sans-extension
-        ;   (file-name-nondirectory filename)))))
+       ; (file-name-sans-extension
+        ; (file-name-nondirectory filename)))))
 
 (defun org-html-get-body-toc (org-html)
   (let ((org-html-body (org-html-get-body org-html))
@@ -64,10 +63,9 @@
 (defun org-org-get-file-tags (org-file)
   (let ((tags (ht-get (org-org-get-file-properties org-file)
                       "TAGS")))
-    (message "TAGS___________________\n%s" tags)
     (if tags
         ;(s-split-words tags)
-	(split-string tags ";")
+(split-string tags ";")
       nil)))
 
 (defun org-org-get-file-mtime (org-file)
@@ -109,8 +107,8 @@
       (progn
         (cd project-directory)
         (make-directory "post")
-	(make-directory "images")
-	(make-directory "sourcecodes")
+(make-directory "images")
+(make-directory "sourcecodes")
         (copy-file (expand-file-name "org-site-config.el"
                                      org-site-load-directory)
                    project-directory)
@@ -223,4 +221,3 @@
     (org-site-render "postamble.html" context)))
 
 (provide 'org-site-utils)
-
