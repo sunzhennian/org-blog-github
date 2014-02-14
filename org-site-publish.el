@@ -52,19 +52,20 @@
     (setq j 0)
     (with-temp-buffer
       (insert "#+TITLE: Home\n")
-      (insert "#+BEGIN_HTML \n <div class=\"span10\" style=\"margin-left:0px\">\n ")
+      (insert "#+BEGIN_HTML \n <div class=\"span10\" style=\"margin-left:0px\">\n<table class=\"table table-striped table-hover \">\n<tbody>\n ")
       (while (< j n_list)
       (setq tmp (ceiling (+ (* n_list i) j)))
       (cond ( (< tmp N_all)
       (setq  path-title-mtime (nth tmp  path-title-mtime-org-files))
-	(setq filenameHTML 
+	(setq filenameHTML
                     (concat
                      (file-name-sans-extension (car path-title-mtime))
                      ".html" ))
-	(insert (format "<h5> <span style=\"float:right\">%s</span><a href=%s style=\"float:left\">%s</a> </h5>\n</br>\n" (format-time-string "%Y-%m-%d" (caddr path-title-mtime)) filenameHTML (cadr path-title-mtime))
-        )))
+	(insert (format "<tr>\n<td><a href=%s>%s</a></td>\n<td>%s</td></tr>" filenameHTML  (cadr path-title-mtime) (format-time-string "%Y-%m-%d" (caddr path-title-mtime))
+        ))))
       (setq j (1+ j))
       )
+      (insert "</tbody>\n</table>")
       (if (> N 1)
       (if (equal i 0) (insert (format "<ul class=\"pager\">\n<li><a href=%s>Next</a></li>\n</ul>\n" index-file-next-html))
 	(if (equal i (1- N))
@@ -79,7 +80,6 @@
       (setq index-file index-file-next)
    )))
   
- 
 (defun org-site-generate-index (base-dir site-sub-dir)
   (let* ((sub-dir (file-name-as-directory
                    (expand-file-name site-sub-dir base-dir)))
