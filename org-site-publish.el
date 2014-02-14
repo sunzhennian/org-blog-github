@@ -133,7 +133,7 @@
          (insert "#+OPTIONS: num:nil toc:nil\n")
          (insert (format "#+TITLE: Tags\n** \n"))
           (dolist (tag tag-keys)
-          (insert (format "**** - [[file:%s][%s (%s)]]\n" (concat (concat "tags/" tag) ".org") tag (length (ht-get tags tag)))))
+          (insert (format "- [[file:%s][%s (%s)]]\n" (concat (concat "tags/" tag) ".org") tag (length (ht-get tags tag)))))
         (when (file-writable-p tags-file)
           (write-region (point-min)
                         (point-max)
@@ -145,9 +145,9 @@
        (with-temp-buffer
          (insert "#+OPTIONS: num:nil toc:nil\n")
          (insert (format "#+TITLE: Tags\n"))
-         (insert (format "** Tag: %s\n" tag))
+         (insert (format "*** Tag: %s\n" tag))
          (dolist (path-title-pair (ht-get tags tag))
-            (insert (format "**** - [[file:%s][%s]]\n"
+            (insert (format "- [[file:%s][%s]]\n"
                             (car path-title-pair)
                             (cdr path-title-pair))))
          (when (file-writable-p tags-file)
@@ -181,7 +181,7 @@
         (insert "#+OPTIONS: num:nil toc:nil\n")
         (insert (format "#+TITLE: Categories\n** \n"))
         (dolist (category category-keys)
-          (insert (format "**** - [[file:%s][%s (%s)]]\n" (concat (concat "categories/" category) ".org") category (length (ht-get categories category))))
+          (insert (format "- [[file:%s][%s (%s)]]\n" (concat (concat "categories/" category) ".org") category (length (ht-get categories category))))
           (dolist (path-title-pair (ht-get categories category))
             ))
         (when (file-writable-p categories-file)
@@ -193,9 +193,9 @@
        (with-temp-buffer
          (insert "#+OPTIONS: num:nil toc:nil\n")
          (insert (format "#+TITLE: Categories\n"))
-         (insert (format "** Category: %s\n" category))
+         (insert (format "*** Category: %s\n" category))
          (dolist (path-title-pair (ht-get categories category))
-            (insert (format "**** - [[file:%s][%s]]\n"
+            (insert (format "- [[file:%s][%s]]\n"
                             (car path-title-pair)
                             (cdr path-title-pair))))
          (when (file-writable-p category-file)
