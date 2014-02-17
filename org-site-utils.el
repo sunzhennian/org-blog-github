@@ -144,7 +144,7 @@
     (set-buffer buffer)
     ;(org-insert-export-options-template)
     (insert "#+Title: \n")
-    (insert "#+DATE:" (format-time-string "%Y-%m-%d"))
+    (insert "#+DATE: " (format-time-string "%Y-%m-%d-%m"))
     (insert "\n")
     (insert "#+OPTIONS: toc:nil num:nil\n")
     (insert "#+CATEGORY:\n")
