@@ -206,18 +206,18 @@
 
 (defun org-site-pre-publish (base-dir)
   (org-site-generate-index-all base-dir "post")
-  (org-site-generate-tags base-dir "post")
+;;  (org-site-generate-tags base-dir "post")
   (org-site-generate-categories base-dir "post"))
 
 (defun org-site-post-publish (base-dir)
   (let ((post-index (expand-file-name "index.org" base-dir))
-        (tags (expand-file-name "tags.org" base-dir))
+;;        (tags (expand-file-name "tags.org" base-dir))
         (categories (expand-file-name "categories.org" base-dir)))
     (unless org-site-debug
-      (delete-directory (expand-file-name "tags" base-dir) t)
+;;      (delete-directory (expand-file-name "tags" base-dir) t)
       (delete-directory (expand-file-name "categories" base-dir) t)
       (delete-directory (expand-file-name "index" base-dir) t)
-      (dolist (org-file (list post-index  tags categories))
+      (dolist (org-file (list post-index  categories))
         (delete-file org-file)))))
 
 (defun org-site-publish7 (project-dir &optional republish localhost)
