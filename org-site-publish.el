@@ -72,10 +72,10 @@
 	     (insert (format "<ul class=\"pager\">\n<li><a href=%s>Previous</a></li>\n</ul>\n" index-file-pre-html))
 	     (insert (format "<ul class=\"pager\">\n<li><a href=%s>Previous</a></li>\n<li><a href=%s>Next</a></li>\n</ul>\n" index-file-pre-html index-file-next-html)))))
       (insert "</div>\n#+END_HTML")
-      (when (file-writable-p index-file)
+      (when (file-writable-p (concat base-dir index-file))
         (write-region (point-min)
                       (point-max)
-                     index-file)))
+                     (concat base-dir index-file))))
       (setq i (1+ i))
       (setq index-file index-file-next)
    )))
@@ -292,6 +292,7 @@
                                                      org-site-html-publish-dir))
            :recursive t
            :publishing-function org-publish-attachment)))
+  (message "-------------->%s" republish)
   (org-publish-all republish)
   (ad-disable-advice 'org-export-as-html 'around 'org-site-export-as-html)
   (ad-deactivate 'org-export-as-html)
@@ -302,15 +303,14 @@
    ;; (list (read-directory-name "Project directory: " org-site-project-directory)
    ;;       (y-or-n-p "Force republish all? ")
    ;;       (unless (s-matches? "localhost" org-site-url)
-   ;;         (y-or-n-p "Force publish in localhost mode? ")))
+  ;;         (y-or-n-p "Force publish in localhost mode? ")))
   (org-site-load-project project-dir)
-
   (unless org-site-html-publish-dir
     (setq org-site-html-publish-dir
           (expand-file-name "publish"
                             org-site-project-directory)))
-  (if (file-exists-p "~/.org-timestamps")
-             (delete-directory "~/.org-timestamps" t))
+ ; (if (file-exists-p "~/.org-timestamps")
+ ;            (delete-directory "~/.org-timestamps" t))
   (if (file-exists-p org-site-html-publish-dir)
       (progn
         (unless (file-directory-p org-site-html-publish-dir)
@@ -328,8 +328,7 @@
 
   (if localhost
       (setq org-site-url "localhost"))
-
- (org-site-pre-publish project-dir)
+  (org-site-pre-publish project-dir)
   ;; Enable and activate the monkey-patched `org-export-as-html'.
   (ad-enable-advice 'org-html-publish-to-html 'around 'org-site-export-to-html)
   (ad-activate 'org-html-publish-to-html)
@@ -360,7 +359,7 @@
            :recursive t
            :publishing-function org-publish-attachment)
 	  ("org-site-images"
-           :base-directory ,"images"
+           :base-directory ,(expand-file-name "images" project-dir)
            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|otf"
            :publishing-directory ,(file-name-as-directory
                                    (expand-file-name "images"
