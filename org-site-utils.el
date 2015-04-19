@@ -15,7 +15,7 @@
   (mustache-render (file-to-string file) context))
 
 (defun org-html-get-body (org-html)
-  (let ((body-regexp "<body>\\(.\\|\n\\)*</body>"))
+  (let ((body-regexp "<body>\\(.*\\|\n\\)*</body>"))
     (car (s-match body-regexp org-html))))
 
 (defun org-org-get-file-title (org-file)
